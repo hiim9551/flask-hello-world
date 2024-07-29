@@ -13,3 +13,20 @@ def testing():
     conn = psycopg2.connect("postgresql://lab10_render_example_user:G5dC179D1ioxdA6j1h6OFxFjr3FQMyXO@dpg-cqj0td8gph6c738vfho0-a/lab10_render_example")
     conn.close()
     return "Database Connection Successful"
+
+@app.route('/db_create')
+def creating():
+    conn = psycopg2.connect("postgresql://lab10_render_example_user:G5dC179D1ioxdA6j1h6OFxFjr3FQMyXO@dpg-cqj0td8gph6c738vfho0-a/lab10_render_example")
+    cur = conn.cursor()
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS Basketball(
+        First varchar(255),
+        Last varchar(255),
+        City varchar(255),
+        Name varchar(255),
+        Number int
+        );
+        ''')
+    conn.commit()
+    conn.close()
+    return "Basketball Table Successfully Created"
